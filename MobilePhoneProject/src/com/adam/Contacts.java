@@ -1,35 +1,28 @@
 package com.adam;
 
-
-
-public class Contacts {
-
-
-    public Contacts(String name, int number){
-        this.name = name;
-        if(number >= 0){
-            this.number = number;
-        } else {
-            System.out.println("Error, invalid number input");
-        }
-    }
+public class Contact {
     private String name;
-    private int number;
+    private String phoneNumber;
+
+
+    public Contact(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public int getNumber() {
-        return number;
+
+
+    public static Contact createContact(String name, String number){
+        return new Contact(name, number);
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
+
 }
-
