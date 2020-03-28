@@ -1,44 +1,72 @@
 package com.adam;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MobilePhone {
-    public static ArrayList<Contacts> contactsList = new ArrayList<Contacts>();
-    public static Scanner sc = new Scanner(System.in);
 
+    private String myNumber;
+    private ArrayList<Contact> myContacts;
 
-    public static void addContact(){
-        System.out.println("Enter Name: ");
-        String contactName = sc.nextLine();
-        System.out.println("Enter Number: ");
-        int contactNumber = sc.nextInt();
-        Contacts newContact = new Contacts(contactName, contactNumber);
-        contactsList.add(newContact);
-
+    public MobilePhone(String myNumber) {
+        this.myNumber = myNumber;
+        this.myContacts = new ArrayList<Contact>();
     }
 
-    public static boolean queryContact(String contactName){
-        for(int i = 0; i <= contactsList.size(); i++){
-            if(contactsList.get(i).getName() == contactName){
-                return true;
+    public boolean addNewContact(Contact contact){
+        if(findContact(contact.getName()) >=0){
+            System.out.println("That contact is already on file");
+            return false;
+        }
+        myContacts.add(contact);
+        return true;
+    }
+
+    public boolean updateContact(Contact oldContact, Contact newContact){
+        int foundPosition = findContact(oldContact);
+        if(foundPosition < 0){
+            System.out.println(oldContact.getName() + " is not found");
+            return false;
+        }
+        this.myContacts.set(foundPosition, newContact);
+        System.out.println(oldContact.getName() + " was replaced with " + newContact.getName());
+        return true;
+    }
+
+
+    private int findContact(Contact contact){
+        return this.myContacts.indexOf(contact);
+    }
+
+    private int findContact(String contactName){
+        for(int i =0; i < this.myContacts.size(); i++){
+            Contact contact = this.myContacts.get(i);
+            if (contact.getName().equals(contactName)){
+                return i;
             }
         }
-        return false;
 
+        return -1;
     }
 
-    public static void removeContact(String removedContact){
-        if(queryContact(removedContact) == false){
-            System.out.println("ERROR: Contact not found");
-        } else {
-            for(int i = 0; i <= contactsList.size(); i++){
-                if(contactsList.get(i).getName() == removedContact){
-                    contactsList.remove(contactsList.get(i));
-                }
-            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public String queryContact(Contact contact){
+        if(findContact(contact) >= 0){
+            return contact.getName();
         }
+        return null;
     }
-
 
 }
