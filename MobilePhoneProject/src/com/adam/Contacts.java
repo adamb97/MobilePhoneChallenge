@@ -1,5 +1,6 @@
 package com.adam;
 
+
 public class Contact {
     private String name;
     private String phoneNumber;
