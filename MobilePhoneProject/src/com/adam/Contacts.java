@@ -1,10 +1,8 @@
-package com.adam;
-
+package com.company;
 
 public class Contact {
     private String name;
     private String phoneNumber;
-
 
     public Contact(String name, String phoneNumber) {
         this.name = name;
@@ -19,11 +17,8 @@ public class Contact {
         return phoneNumber;
     }
 
-
-
-    public static Contact createContact(String name, String number){
-        return new Contact(name, number);
+    public static Contact createContact(String name, String phonenum){
+        return new Contact(name, phonenum);
     }
-
 
 }
